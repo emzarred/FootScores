@@ -1,8 +1,8 @@
 package com.example.pc.viewpager.Retrofits;
 
-;
+
 import com.example.pc.viewpager.Models.Competition;
-import com.example.pc.viewpager.Models.Team;
+import com.example.pc.viewpager.Models.Teams;
 
 import java.util.List;
 
@@ -17,5 +17,5 @@ public interface ApiInterface {
     @GET( "competitions")
     Call<List<Competition>> getAllCompetitions();
     @GET("competitions/444/teams")
-    Call<List<Team>>getAllTeams();
+    Call<Teams>getAllTeams();
 }

@@ -1,13 +1,13 @@
 package com.example.pc.viewpager.Models;
 
-/**
- * Created by pc on 26/04/2018.
- */
-
-
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
+/**
+ * Created by pc on 27/04/2018.
+ */
 
 public class Teams {
 
@@ -44,5 +44,4 @@ public class Teams {
     public void setTeams(List<Team> teams) {
         this.teams = teams;
     }
-
 }

@@ -5,13 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.pc.viewpager.Controllers.Activities.test;
-import com.example.pc.viewpager.Controllers.Fragments.TeamsFragment;
 import com.example.pc.viewpager.Models.Competition;
 import com.example.pc.viewpager.R;
+import com.example.pc.viewpager.Views.TeamView;
 
 import java.util.List;
 
@@ -72,7 +70,7 @@ public  class MyAdapter extends RecyclerView.Adapter {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent=new Intent(itemView.getContext(),test.class);
+                    Intent intent=new Intent(itemView.getContext(),TeamView.class);
 
                     itemView.getContext().startActivity(intent);
                 }
