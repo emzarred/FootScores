@@ -20,6 +20,10 @@ public class TeamAdapter extends RecyclerView.Adapter {
 
 private Teams teams;
 private List<Team>list;
+
+    public TeamAdapter(List<Team> list) {this.list=list;
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater=LayoutInflater.from(parent.getContext());
@@ -29,8 +33,9 @@ private List<Team>list;
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        teams.getTeams()
-ViewHolder.caption.setText("hfr");
+        Team team = list.get(position);
+
+        ViewHolder.caption.setText(team.getName());
     }
 
     @Override
