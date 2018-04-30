@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.pc.viewpager.Controllers.Fragments.FavoritFragment;
-import com.example.pc.viewpager.Controllers.Fragments.PageFragment;
+import com.example.pc.viewpager.Controllers.Fragments.CompetitionFragment;
 import com.example.pc.viewpager.Controllers.Fragments.TodayFragment;
 
 /**
@@ -32,7 +32,7 @@ public class PageAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return (PageFragment.newInstance(position, this.colors[position]));
+                return (CompetitionFragment.newInstance(position, this.colors[position]));
             case 1:
                 return (TodayFragment.newInstance(position, this.colors[position]));
             case 2:

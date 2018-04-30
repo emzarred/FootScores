@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 
 import android.widget.Toast;
 
-import com.example.pc.viewpager.Adapters.MyAdapter;
+import com.example.pc.viewpager.Adapters.CompAdapter;
 import com.example.pc.viewpager.Models.Competition;
 import com.example.pc.viewpager.R;
 import com.example.pc.viewpager.Retrofits.ApiClient;
@@ -31,7 +31,7 @@ import retrofit2.Retrofit;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PageFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class CompetitionFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     ApiClient configRetro = new ApiClient();
     Retrofit retrofit = configRetro.getClient();
 
@@ -43,14 +43,14 @@ public class PageFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private static final String KEY_COLOR="color";
 
 
-    public PageFragment() { }
+    public CompetitionFragment() { }
 
 
-    // 2 - Method that will create a new instance of PageFragment, and add data to its bundle.
-    public static PageFragment newInstance(int position, int color) {
+    // 2 - Method that will create a new instance of CompetitionFragment, and add data to its bundle.
+    public static CompetitionFragment newInstance(int position, int color) {
 
         // 2.1 Create new fragment
-        PageFragment frag = new PageFragment();
+        CompetitionFragment frag = new CompetitionFragment();
 
         // 2.2 Create bundle and add it some data
         Bundle args = new Bundle();
@@ -65,7 +65,7 @@ public class PageFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        // 3 - Get layout of PageFragment
+        // 3 - Get layout of CompetitionFragment
         View result = inflater.inflate(R.layout.fragment_page, container, false);
 
         // 4 - Get widgets from layout and serialise it
@@ -101,7 +101,7 @@ public class PageFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             public void onResponse(Call<List<Competition>> call, Response<List<Competition>> response) {
 
                 List<Competition> list = (List<Competition>) response.body();
-                rv.setAdapter(new MyAdapter(list));
+                rv.setAdapter(new CompAdapter(list));
 
 
             }

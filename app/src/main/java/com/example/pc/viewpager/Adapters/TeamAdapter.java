@@ -18,8 +18,7 @@ import java.util.List;
 
 public class TeamAdapter extends RecyclerView.Adapter {
 
-private Teams teams;
-private List<Team>list;
+    private List<Team>list;
 
     public TeamAdapter(List<Team> list) {this.list=list;
     }
@@ -40,7 +39,7 @@ private List<Team>list;
 
     @Override
     public int getItemCount() {
-        return teams.getCount();
+        return list.size();
     }
     public static class ViewHolder extends RecyclerView.ViewHolder {
 

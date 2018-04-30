@@ -22,7 +22,7 @@ public class TodayFragment extends Fragment {
     public TodayFragment() { }
 
 
-    // 2 - Method that will create a new instance of PageFragment, and add data to its bundle.
+    // 2 - Method that will create a new instance of CompetitionFragment, and add data to its bundle.
     public static TodayFragment newInstance(int position, int color) {
 
         // 2.1 Create new fragment
@@ -41,7 +41,7 @@ public class TodayFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        // 3 - Get layout of PageFragment
+        // 3 - Get layout of CompetitionFragment
         View result = inflater.inflate(R.layout.fragment_page, container, false);
 
         // 4 - Get widgets from layout and serialise it

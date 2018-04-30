@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.pc.viewpager.Models.Competition;
 import com.example.pc.viewpager.R;
+import com.example.pc.viewpager.Views.DetailActivity;
 import com.example.pc.viewpager.Views.TeamView;
 
 import java.util.List;
@@ -18,10 +19,10 @@ import java.util.List;
  */
 
 
-public  class MyAdapter extends RecyclerView.Adapter {
+public  class CompAdapter extends RecyclerView.Adapter {
     private List<Competition> list;
 
-    public MyAdapter(List<Competition> list)
+    public CompAdapter(List<Competition> list)
     {
         this.list = list;
     }
@@ -29,7 +30,7 @@ public  class MyAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.comp_cell, parent, false);
-        return new MyAdapter.ViewHolder(view);
+        return new CompAdapter.ViewHolder(view);
     }
 
 
@@ -37,8 +38,7 @@ public  class MyAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Competition competition = list.get(position);
 
-        MyAdapter.ViewHolder.caption.setText(competition.getCaption() + "(" + String.valueOf(competition.getCurrentMatchday()) +"/" + String.valueOf(competition.getNumberOfMatchdays()) + ")");
-
+        CompAdapter.ViewHolder.caption.setText(competition.getCaption() +  "(" + String.valueOf(competition.getCurrentMatchday()) +"/" + String.valueOf(competition.getNumberOfMatchdays()) + ")");
 
     }
     @Override
@@ -61,8 +61,6 @@ public  class MyAdapter extends RecyclerView.Adapter {
         static TextView caption;
 
 
-
-
         public ViewHolder(View v) {
             super(v);
 
@@ -70,8 +68,7 @@ public  class MyAdapter extends RecyclerView.Adapter {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent=new Intent(itemView.getContext(),TeamView.class);
-
+                    Intent intent=new Intent(itemView.getContext(),DetailActivity.class);
                     itemView.getContext().startActivity(intent);
                 }
             });
