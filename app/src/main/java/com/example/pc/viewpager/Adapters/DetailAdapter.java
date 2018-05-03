@@ -4,8 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.example.pc.viewpager.Controllers.Fragments.FixturesFragment;
 import com.example.pc.viewpager.Controllers.Fragments.LeagueTabFragment;
 import com.example.pc.viewpager.Controllers.Fragments.TeamFragment;
+import com.example.pc.viewpager.Models.Fixtures;
 
 /**
  * Created by pc on 30/04/2018.
@@ -33,7 +35,7 @@ public class DetailAdapter extends FragmentPagerAdapter {
             case 1:
                 return (LeagueTabFragment.newInstance(position, this.colors[position]));
             case 2:
-                return (TeamFragment.newInstance(position, this.colors[position]));
+                return (FixturesFragment.newInstance(position, this.colors[position]));
         }
         return null;
 

@@ -47,7 +47,7 @@ public class CompetitionFragment extends Fragment implements SwipeRefreshLayout.
 
 
     // 2 - Method that will create a new instance of CompetitionFragment, and add data to its bundle.
-    public static CompetitionFragment newInstance(int position, int color) {
+    public static CompetitionFragment newInstance(int position) {
 
         // 2.1 Create new fragment
         CompetitionFragment frag = new CompetitionFragment();
@@ -55,7 +55,7 @@ public class CompetitionFragment extends Fragment implements SwipeRefreshLayout.
         // 2.2 Create bundle and add it some data
         Bundle args = new Bundle();
         args.putInt(KEY_POSITION, position);
-        args.putInt(KEY_COLOR, color);
+
         frag.setArguments(args);
 
         return(frag);

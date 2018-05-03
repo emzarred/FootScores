@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.example.pc.viewpager.Models.Competition;
 import com.example.pc.viewpager.R;
 import com.example.pc.viewpager.Views.DetailActivity;
-import com.example.pc.viewpager.Views.TeamView;
+
 
 import java.util.List;
 

@@ -16,10 +16,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.pc.viewpager.Adapters.TabAdapter;
+import com.example.pc.viewpager.Adapters.FixturesAdapter;
 import com.example.pc.viewpager.Adapters.TeamAdapter;
-import com.example.pc.viewpager.Models.LeagueTable;
-import com.example.pc.viewpager.Models.Standing;
+import com.example.pc.viewpager.Models.Fixture;
+import com.example.pc.viewpager.Models.Fixtures;
+import com.example.pc.viewpager.Models.Result;
 import com.example.pc.viewpager.Models.Team;
 import com.example.pc.viewpager.Models.Teams;
 import com.example.pc.viewpager.R;
@@ -36,29 +37,34 @@ import retrofit2.Retrofit;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link} interface
+ * {@l
+ * interface
  * to handle interaction events.
- * Use the {@link LeagueTabFragment#newInstance} factory method to
+ * Use the {@link FixturesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LeagueTabFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-    private static final String KEY_POSITION="position";
-    private static final String KEY_COLOR="color";
-    private RecyclerView rv;
-    private SwipeRefreshLayout spr;
-    List<Standing> list;
-    private ApiInterface cmp;
+public class FixturesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     ApiClient configRetro = new ApiClient();
     Retrofit retrofit = configRetro.getClient();
 
-    public LeagueTabFragment() { }
+    List<Fixture> list;
+
+    private ApiInterface cmp;
+    private RecyclerView rv;
+    private SwipeRefreshLayout spr;
+    private static final String KEY_POSITION = "position";
+    private static final String KEY_COLOR = "color";
+
+
+    public FixturesFragment() {
+    }
 
 
     // 2 - Method that will create a new instance of CompetitionFragment, and add data to its bundle.
-    public static LeagueTabFragment newInstance(int position, int color) {
+    public static FixturesFragment newInstance(int position, int color) {
 
         // 2.1 Create new fragment
-        LeagueTabFragment frag = new LeagueTabFragment();
+        FixturesFragment frag = new FixturesFragment();
 
         // 2.2 Create bundle and add it some data
         Bundle args = new Bundle();
@@ -66,7 +72,7 @@ public class LeagueTabFragment extends Fragment implements SwipeRefreshLayout.On
         args.putInt(KEY_COLOR, color);
         frag.setArguments(args);
 
-        return(frag);
+        return (frag);
     }
 
 
@@ -77,41 +83,45 @@ public class LeagueTabFragment extends Fragment implements SwipeRefreshLayout.On
         View result = inflater.inflate(R.layout.fragment_page, container, false);
 
         // 4 - Get widgets from layout and serialise it
-        LinearLayout rootView= (LinearLayout) result.findViewById(R.id.fragment_page_rootview);
-        TextView textView= (TextView) result.findViewById(R.id.fragment_page_title);
-        spr = (SwipeRefreshLayout) result.findViewById(R.id.swipe);
+        LinearLayout rootView = (LinearLayout) result.findViewById(R.id.fragment_page_rootview);
         rv = (RecyclerView) result.findViewById(R.id.list);
+
+
+        spr = (SwipeRefreshLayout) result.findViewById(R.id.swipe);
         spr.setOnRefreshListener((SwipeRefreshLayout.OnRefreshListener) this);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
-        getTab();
+        getFixturess();
+
 
         // 5 - Get data from Bundle (created in method newInstance)
         int position = getArguments().getInt(KEY_POSITION, -1);
         int color = getArguments().getInt(KEY_COLOR, -1);
 
         // 6 - Update widgets with it
+
         rootView.setBackgroundColor(color);
         // textView.setText("Page numéro "+position);
 
-        Log.e(getClass().getSimpleName(), "onCreateView called for fragment number "+position);
+        Log.e(getClass().getSimpleName(), "onCreateView called for fragment number " + position);
 
         return result;
     }
 
-    private void getTab() {
+    private void getFixturess() {
+
+
         final ApiInterface cmp = retrofit.create(ApiInterface.class);
-        Call<LeagueTable> call = cmp.getLeagueTable();
+        Call<Fixtures> call = cmp.getAllFixtures();
 
-        call.enqueue(new Callback<LeagueTable>() {
+        call.enqueue(new Callback<Fixtures>() {
             @Override
-            public void onResponse(Call<LeagueTable> call, Response<LeagueTable> response) {
-
-                List<Standing> list = (List<Standing>) response.body().getStanding();
-                rv.setAdapter(new TabAdapter(list));
+            public void onResponse(Call<Fixtures> call, Response<Fixtures> response) {
+                List<Fixture> list = response.body().getFixtures();
+           rv.setAdapter(new FixturesAdapter(list));
             }
 
             @Override
-            public void onFailure(Call<LeagueTable> call, Throwable t) {
+            public void onFailure(Call<Fixtures> call, Throwable t) {
             }
 
         });
@@ -127,7 +137,8 @@ public class LeagueTabFragment extends Fragment implements SwipeRefreshLayout.On
                 spr.setRefreshing(false);
             }
         }, 2000);
-        getTab();
+        getFixturess();
 
     }
+
 }

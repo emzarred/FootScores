@@ -32,7 +32,7 @@ public class PageAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return (CompetitionFragment.newInstance(position, this.colors[position]));
+                return (CompetitionFragment.newInstance(position));
             case 1:
                 return (TodayFragment.newInstance(position, this.colors[position]));
             case 2:
