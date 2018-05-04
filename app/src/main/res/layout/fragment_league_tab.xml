@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        tools:context="com.example.pc.viewpager.Controllers.Fragments.CompetitionFragment">
+        tools:context="com.example.pc.footscore.Controllers.Fragments.CompetitionFragment">
 
 
         <android.support.v7.widget.RecyclerView
