@@ -36,6 +36,18 @@ public class PlayAdapter extends RecyclerView.Adapter {
 
         PlayAdapter.ViewHolder.caption.setText(player.getName());
     }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+
     @Override
     public int getItemCount() {
         return list.size();

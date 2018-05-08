@@ -72,17 +72,19 @@ public class CompetitionFragment extends Fragment implements SwipeRefreshLayout.
 
         // 4 - Get widgets from layout and serialise it
       LinearLayout rootView= (LinearLayout) result.findViewById(R.id.fragment_page_rootview);
+
         rv7 = (RecyclerView) result.findViewById(R.id.list);
-        rv8 = (RecyclerView) result.findViewById(R.id.list1);
+
+        //rv8 = (RecyclerView) result.findViewById(R.id.list1);
 
 
 
         spr = (SwipeRefreshLayout) result.findViewById(R.id.swipe);
         spr.setOnRefreshListener((SwipeRefreshLayout.OnRefreshListener) this);
         rv7.setLayoutManager(new LinearLayoutManager(getContext()));
-        rv8.setLayoutManager(new LinearLayoutManager(getContext()));
+       // rv8.setLayoutManager(new LinearLayoutManager(getContext()));
         getCompetitions_7();
-        getCompetitions_8();
+       // getCompetitions_8();
 
 
         // 5 - Get data from Bundle (created in method newInstance)
@@ -101,7 +103,7 @@ public class CompetitionFragment extends Fragment implements SwipeRefreshLayout.
 
     private void getCompetitions_7() {
         final ApiInterface cmp = retrofit.create(ApiInterface.class);
-        Call<List<Competition>> call = cmp.getAllCompetitions("2017");
+        Call<List<Competition>> call = cmp.getAllCompetitions("2018");
         call.enqueue(new Callback<List<Competition>>() {
             @Override
             public void onResponse(Call<List<Competition>> call, Response<List<Competition>> response) {
@@ -122,7 +124,7 @@ public class CompetitionFragment extends Fragment implements SwipeRefreshLayout.
         });
 
     }
-    private void getCompetitions_8() {
+  /*  private void getCompetitions_8() {
         final ApiInterface cmp = retrofit.create(ApiInterface.class);
         Call<List<Competition>> call = cmp.getAllCompetitions("2018");
         call.enqueue(new Callback<List<Competition>>() {
@@ -144,7 +146,7 @@ public class CompetitionFragment extends Fragment implements SwipeRefreshLayout.
 
         });
 
-    }
+    }*/
     @Override
     public void onRefresh() {
         Toast.makeText(getContext(), "Refresh", Toast.LENGTH_SHORT).show();
@@ -155,7 +157,7 @@ public class CompetitionFragment extends Fragment implements SwipeRefreshLayout.
             }
         }, 2000);
         getCompetitions_7();
-        getCompetitions_8();
+       // getCompetitions_8();
 
     }
 }

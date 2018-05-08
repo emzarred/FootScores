@@ -1,5 +1,6 @@
 package com.example.pc.footscore.Controllers.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -26,6 +27,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+
+import static com.example.pc.footscore.Adapters.TeamAdapter.context;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -109,7 +112,7 @@ public class TeamFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             public void onResponse(Call<Teams> call, Response<Teams> response) {
                 Log.d("TeamView", "onResponse: "+response.body().getTeams());
                 List<Team> list =response.body().getTeams();
-                rv.setAdapter(new TeamAdapter(list));
+                rv.setAdapter(new TeamAdapter(list,context));
             }
 
             @Override

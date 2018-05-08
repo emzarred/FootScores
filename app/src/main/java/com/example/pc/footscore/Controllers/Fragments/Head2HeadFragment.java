@@ -1,5 +1,7 @@
 package com.example.pc.footscore.Controllers.Fragments;
 
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,19 +12,23 @@ import android.widget.TextView;
 
 import com.example.pc.footscore.R;
 
-public class FavoritFragment extends Fragment {
+
+/**
+
+ */
+public class Head2HeadFragment extends Fragment {
     private static final String KEY_POSITION="position";
     private static final String KEY_COLOR="color";
 
 
-    public FavoritFragment() { }
+    public Head2HeadFragment() { }
 
 
     // 2 - Method that will create a new instance of CompetitionFragment, and add data to its bundle.
-    public static FavoritFragment newInstance(int position, int color) {
+    public static Head2HeadFragment newInstance(int position, int color) {
 
         // 2.1 Create new fragment
-        FavoritFragment frag = new FavoritFragment();
+        Head2HeadFragment frag = new Head2HeadFragment();
 
         // 2.2 Create bundle and add it some data
         Bundle args = new Bundle();

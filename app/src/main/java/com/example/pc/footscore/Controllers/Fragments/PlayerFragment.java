@@ -1,6 +1,9 @@
 package com.example.pc.footscore.Controllers.Fragments;
 
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,13 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.pc.footscore.Adapters.FixturesAdapter;
-import com.example.pc.footscore.Adapters.TodayAdapter;
-import com.example.pc.footscore.Models.Competition;
-import com.example.pc.footscore.Models.Fixture;
-import com.example.pc.footscore.Models.Fixtures;
-import com.example.pc.footscore.Models.Today;
+import com.example.pc.footscore.Adapters.PlayAdapter;
+import com.example.pc.footscore.Adapters.TabAdapter;
+import com.example.pc.footscore.Models.LeagueTable;
+import com.example.pc.footscore.Models.Player;
+import com.example.pc.footscore.Models.Players;
+import com.example.pc.footscore.Models.Standing;
 import com.example.pc.footscore.R;
 import com.example.pc.footscore.Retrofits.ApiClient;
 import com.example.pc.footscore.Retrofits.ApiInterface;
@@ -29,25 +33,28 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-
-public class TodayFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this
+ */
+public class PlayerFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private static final String KEY_POSITION="position";
     private static final String KEY_COLOR="color";
+    private RecyclerView rv;
+    private SwipeRefreshLayout spr;
+    List<Player> list;
+    private ApiInterface cmp;
     ApiClient configRetro = new ApiClient();
     Retrofit retrofit = configRetro.getClient();
-private  RecyclerView rv;
-private SwipeRefreshLayout spr;
-   private List<Fixture> list;
-    private ApiInterface cmp;
 
-    public TodayFragment() { }
+    public PlayerFragment() { }
 
 
     // 2 - Method that will create a new instance of CompetitionFragment, and add data to its bundle.
-    public static TodayFragment newInstance(int position, int color) {
+    public static PlayerFragment newInstance(int position, int color) {
 
         // 2.1 Create new fragment
-        TodayFragment frag = new TodayFragment();
+        PlayerFragment frag = new PlayerFragment();
 
         // 2.2 Create bundle and add it some data
         Bundle args = new Bundle();
@@ -68,14 +75,11 @@ private SwipeRefreshLayout spr;
         // 4 - Get widgets from layout and serialise it
         LinearLayout rootView= (LinearLayout) result.findViewById(R.id.fragment_page_rootview);
         TextView textView= (TextView) result.findViewById(R.id.fragment_page_title);
-        rv = (RecyclerView) result.findViewById(R.id.list);
-
-
-
         spr = (SwipeRefreshLayout) result.findViewById(R.id.swipe);
+        rv = (RecyclerView) result.findViewById(R.id.list);
         spr.setOnRefreshListener((SwipeRefreshLayout.OnRefreshListener) this);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
-        getMatches();
+        getPlayers();
 
         // 5 - Get data from Bundle (created in method newInstance)
         int position = getArguments().getInt(KEY_POSITION, -1);
@@ -90,28 +94,36 @@ private SwipeRefreshLayout spr;
         return result;
     }
 
-    private void getMatches() {
+    private void getPlayers() {
         final ApiInterface cmp = retrofit.create(ApiInterface.class);
-        Call<Today> call = cmp.getAllMatchs();
+        Call<Players> call = cmp.getAllPlayers();
 
-
-
-        call.enqueue(new Callback<Today>() {
+        call.enqueue(new Callback<Players>() {
             @Override
-            public void onResponse(Call<Today> call, Response<Today> response) {
-                List<Fixture> list = response.body().getFixtures();
-                rv.setAdapter(new TodayAdapter(list));
+            public void onResponse(Call<Players> call, Response<Players> response) {
+
+                List<Player> list = (List<Player>) response.body().getPlayers();
+                rv.setAdapter(new PlayAdapter(list));
             }
 
             @Override
-            public void onFailure(Call<Today> call, Throwable t) {
+            public void onFailure(Call<Players> call, Throwable t) {
             }
 
         });
+
     }
 
     @Override
     public void onRefresh() {
+        Toast.makeText(getContext(), "Refresh", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                spr.setRefreshing(false);
+            }
+        }, 2000);
+        getPlayers();
 
     }
 }
