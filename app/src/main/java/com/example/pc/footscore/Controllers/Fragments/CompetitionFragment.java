@@ -103,7 +103,7 @@ public class CompetitionFragment extends Fragment implements SwipeRefreshLayout.
 
     private void getCompetitions_7() {
         final ApiInterface cmp = retrofit.create(ApiInterface.class);
-        Call<List<Competition>> call = cmp.getAllCompetitions("2018");
+        Call<List<Competition>> call = cmp.getAllCompetitions(2018);
         call.enqueue(new Callback<List<Competition>>() {
             @Override
             public void onResponse(Call<List<Competition>> call, Response<List<Competition>> response) {

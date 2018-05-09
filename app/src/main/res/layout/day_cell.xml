@@ -11,15 +11,15 @@
 
         <CheckBox
             android:id="@+id/checkBox"
-            android:layout_width="56dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            />
+            style="@android:style/Widget.Holo.ActionButton.Overflow"
+            android:layout_width="13dp"
+            android:layout_height="33dp"
+            android:layout_weight="1"/>
 
         <TextView
             android:id="@+id/TvDate"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="TextView"
             android:textSize="10sp"
@@ -28,7 +28,7 @@
         <TextView
             android:id="@+id/TvHome"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="TextView"
             android:textSize="12sp"
@@ -37,7 +37,7 @@
         <TextView
             android:id="@+id/TvScore"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Score"
             android:textAlignment="center"
@@ -46,7 +46,7 @@
         <TextView
             android:id="@+id/TvAway"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="TextView"
             android:textSize="12sp"

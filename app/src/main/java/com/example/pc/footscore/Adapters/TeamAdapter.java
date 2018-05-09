@@ -13,10 +13,16 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.pc.footscore.Models.Team;
 import com.example.pc.footscore.R;
-import com.example.pc.footscore.Views.PlayerActivity;
+
 import com.example.pc.footscore.Views.TeamDetail;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by pc on 26/04/2018.
@@ -47,8 +53,49 @@ private ImageView flag;
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Team team = list.get(position);
+/*Glide.clear(ViewHolder.flag);
+      Glide.with(context)
+              .load(team.getCrestUrl().toString())
+              .placeholder(R.drawable.stade)
+               .centerCrop()
+                .override(30,50)
+              .into(ViewHolder.flag);*/
+      /*  Picasso.with(context)
+                .load(team.getCrestUrl().toString())
+                .networkPolicy(NetworkPolicy.OFFLINE)//user this for offline support
+                .into(ViewHolder.flag, new Callback() {
+                    @Override
+                    public void onResponse(Call call, Response response) {
 
-      //Glide.with(context).load(team.getCrestUrl().toString()).override(30,50).into(ViewHolder.flag);
+                    }
+
+                    @Override
+                    public void onFailure(Call call, Throwable t) {
+
+                    }
+
+
+
+                    @Override
+                    public void onError() {
+                        Picasso.with(context)
+                                .load(team.getCrestUrl().toString())
+                                .error(android.R.drawable.stat_notify_error)//user this for offline support
+                                .into(ViewHolder.flag, new Callback() {
+                                    @Override
+                                    public void onResponse(Call call, Response response) {
+
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call call, Throwable t) {
+
+                                    }
+
+
+                                });
+                    }
+                });*/
         ViewHolder.caption.setText(team.getName());
 
 

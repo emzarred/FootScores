@@ -69,7 +69,7 @@ public class LeagueTabFragment extends Fragment implements SwipeRefreshLayout.On
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         // 3 - Get layout of CompetitionFragment
-        View result = inflater.inflate(R.layout.fragment_page, container, false);
+        View result = inflater.inflate(R.layout.fragment_league_tab, container, false);
 
         // 4 - Get widgets from layout and serialise it
         LinearLayout rootView= (LinearLayout) result.findViewById(R.id.fragment_page_rootview);

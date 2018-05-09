@@ -14,7 +14,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.pc.footscore.Adapters.CompAdapter;
 import com.example.pc.footscore.Adapters.TeamAdapter;
+import com.example.pc.footscore.Models.Competition;
 import com.example.pc.footscore.Models.Team;
 import com.example.pc.footscore.Models.Teams;
 import com.example.pc.footscore.R;
@@ -41,8 +43,8 @@ import static com.example.pc.footscore.Adapters.TeamAdapter.context;
 public class TeamFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     ApiClient configRetro = new ApiClient();
     Retrofit retrofit = configRetro.getClient();
-
     List<Team> list;
+
     private ApiInterface cmp;
     private RecyclerView rv;
     private SwipeRefreshLayout spr;
@@ -83,6 +85,8 @@ public class TeamFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         spr = (SwipeRefreshLayout) result.findViewById(R.id.swipe);
         spr.setOnRefreshListener((SwipeRefreshLayout.OnRefreshListener) this);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
+          
+
         getTeams();
 
 
@@ -105,12 +109,13 @@ public class TeamFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
 
         final ApiInterface cmp = retrofit.create(ApiInterface.class);
-        Call<Teams> call = cmp.getAllTeams();
+
+        Call<Teams> call = cmp.getAllTeams(453);
         Log.d("TeamView", "onResponse: "+call);
         call.enqueue(new Callback<Teams>() {
             @Override
             public void onResponse(Call<Teams> call, Response<Teams> response) {
-                Log.d("TeamView", "onResponse: "+response.body().getTeams());
+                
                 List<Team> list =response.body().getTeams();
                 rv.setAdapter(new TeamAdapter(list,context));
             }

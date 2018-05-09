@@ -39,7 +39,7 @@ public  class CompAdapter extends RecyclerView.Adapter {
         Competition competition = list.get(position);
 
         CompAdapter.ViewHolder.caption.setText(competition.getCaption() +  "(" + String.valueOf(competition.getCurrentMatchday()) +"/" + String.valueOf(competition.getNumberOfMatchdays()) + ")");
-
+ViewHolder.Id= competition.getId();
     }
     @Override
     public long getItemId(int position) {
@@ -59,7 +59,7 @@ public  class CompAdapter extends RecyclerView.Adapter {
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         static TextView caption;
-
+public static int Id;
 
         public ViewHolder(View v) {
             super(v);
@@ -69,6 +69,7 @@ public  class CompAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View view) {
                     Intent intent=new Intent(itemView.getContext(),DetailActivity.class);
+                    intent.putExtra("id",Id);
                     itemView.getContext().startActivity(intent);
                 }
             });
