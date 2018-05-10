@@ -32,6 +32,12 @@ public class Fixture {
     @SerializedName("odds")
     @Expose
     private Object odds;
+    @SerializedName("goalsHomeTeam")
+    @Expose
+    private Integer goalsHomeTeam;
+    @SerializedName("goalsAwayTeam")
+    @Expose
+    private Integer goalsAwayTeam;
 
   /*  public Links_ getLinks() {
         return links;

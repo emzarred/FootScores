@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.pc.footscore.Models.Fixture;
+import com.example.pc.footscore.Models.Result;
 import com.example.pc.footscore.R;
 
 import java.util.List;
@@ -17,10 +18,10 @@ import java.util.List;
 
 public class FixturesAdapter extends RecyclerView.Adapter {
     private List<Fixture> list;
-   // private List<Result> listR;
+    //private List<Result> listR;
 
     public FixturesAdapter(List<Fixture> list) {this.list=list;
-    //this.listR=listR;
+   // this.listR=listR;
 
     }
 
@@ -38,7 +39,7 @@ public class FixturesAdapter extends RecyclerView.Adapter {
 
         ViewHolder.TvDate.setText(fixture.getDate()  );
         ViewHolder.TvHome.setText(fixture.getHomeTeamName());
-       // ViewHolder.TvScore.setText(result.getGoalsHomeTeam() + "-" + result.getGoalsAwayTeam());
+        //ViewHolder.TvScore.setText((result.getGoalsHomeTeam()).toString() + "-" + (result.getGoalsAwayTeam()).toString());
         ViewHolder.TvAway.setText(fixture.getAwayTeamName());
     }
     @Override

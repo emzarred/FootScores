@@ -3,20 +3,41 @@ package com.example.pc.footscore.Controllers.Fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.pc.footscore.Models.Fixture;
+import com.example.pc.footscore.Models.Result;
 import com.example.pc.footscore.R;
+import com.example.pc.footscore.Retrofits.ApiClient;
+import com.example.pc.footscore.Retrofits.ApiInterface;
+
+import java.util.List;
+
+import retrofit2.Retrofit;
 
 
 /**
 
  */
-public class Head2HeadFragment extends Fragment {
+public class Head2HeadFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+    ApiClient configRetro = new ApiClient();
+    Retrofit retrofit = configRetro.getClient();
+
+
+
+    private ApiInterface cmp;
+    private RecyclerView rv;
+    private SwipeRefreshLayout spr;
     private static final String KEY_POSITION="position";
     private static final String KEY_COLOR="color";
 
@@ -50,6 +71,12 @@ public class Head2HeadFragment extends Fragment {
         // 4 - Get widgets from layout and serialise it
         LinearLayout rootView= (LinearLayout) result.findViewById(R.id.fragment_page_rootview);
         TextView textView= (TextView) result.findViewById(R.id.fragment_page_title);
+        rv = (RecyclerView) result.findViewById(R.id.list);
+
+
+        spr = (SwipeRefreshLayout) result.findViewById(R.id.swipe);
+        spr.setOnRefreshListener((SwipeRefreshLayout.OnRefreshListener) this);
+        rv.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // 5 - Get data from Bundle (created in method newInstance)
         int position = getArguments().getInt(KEY_POSITION, -1);
@@ -62,5 +89,16 @@ public class Head2HeadFragment extends Fragment {
         //Log.e(getClass().getSimpleName(), "onCreateView called for fragment number "+position);
 
         return result;
+    }
+
+    @Override
+    public void onRefresh() {
+        Toast.makeText(getContext(), "Refresh", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                spr.setRefreshing(false);
+            }
+        }, 2000);
     }
 }

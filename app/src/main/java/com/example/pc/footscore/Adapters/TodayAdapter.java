@@ -46,7 +46,7 @@ public class TodayAdapter extends RecyclerView.Adapter {
 
         TodayAdapter.ViewHolder.TvDate.setText(fixture.getDate());
         TodayAdapter.ViewHolder.TvHome.setText(fixture.getHomeTeamName());
-        //iewHolder.TvScore.setText((CharSequence) fixture.getResult());
+        //ViewHolder.TvScore.setText( fixture.getGoalsHomeTeam().toString());
         TodayAdapter.ViewHolder.TvAway.setText(fixture.getAwayTeamName());
     }
 

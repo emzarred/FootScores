@@ -30,7 +30,7 @@ public interface ApiInterface {
     @GET("competitions/452/leagueTable")
     Call<LeagueTable> getLeagueTable();
 
-    @GET("competitions/452/fixtures?matchday=32")
+    @GET("competitions/398/fixtures")
     Call<Fixtures> getAllFixtures();
 
     @GET("teams/66/players")
@@ -39,7 +39,7 @@ public interface ApiInterface {
     @GET("fixtures")
     Call<Today> getAllMatchs();
 
-    @GET("teams/66/fixtures?timeFrame=n14&venue=home")
+    @GET("teams/66/fixtures")
     Call<TeamFix> getAllFutureFixtures();
 
 }
