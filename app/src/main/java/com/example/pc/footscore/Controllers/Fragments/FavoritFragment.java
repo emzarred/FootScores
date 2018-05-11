@@ -10,9 +10,14 @@ import android.widget.TextView;
 
 import com.example.pc.footscore.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class FavoritFragment extends Fragment {
     private static final String KEY_POSITION="position";
     private static final String KEY_COLOR="color";
+    //private Date d;
 
 
     public FavoritFragment() { }
@@ -39,11 +44,17 @@ public class FavoritFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         // 3 - Get layout of CompetitionFragment
-        View result = inflater.inflate(R.layout.fragment_page, container, false);
+        View result = inflater.inflate(R.layout.fragment_today, container, false);
 
         // 4 - Get widgets from layout and serialise it
         LinearLayout rootView= (LinearLayout) result.findViewById(R.id.fragment_page_rootview);
         TextView textView= (TextView) result.findViewById(R.id.fragment_page_title);
+        TextView date=(TextView) result.findViewById(R.id.date);
+
+      // String c= String.valueOf(d.getDate());
+
+        String c = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        date.setText(c);
 
         // 5 - Get data from Bundle (created in method newInstance)
         int position = getArguments().getInt(KEY_POSITION, -1);

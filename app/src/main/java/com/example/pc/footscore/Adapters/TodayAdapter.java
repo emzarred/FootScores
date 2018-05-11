@@ -1,7 +1,9 @@
 package com.example.pc.footscore.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
+import android.view.SurfaceView;
+import android.widget.ViewAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +16,13 @@ import com.example.pc.footscore.Models.Fixture;
 import com.example.pc.footscore.Models.Today;
 import com.example.pc.footscore.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static android.app.PendingIntent.getActivity;
+import static android.support.constraint.solver.widgets.ConstraintWidget.GONE;
 
 /**
  * Created by pc on 07/05/2018.
@@ -25,12 +31,13 @@ import static android.app.PendingIntent.getActivity;
 public class TodayAdapter extends RecyclerView.Adapter {
     private List<Fixture> list;
     // private List<Result> listR;
-
     public TodayAdapter(List<Fixture> list) {
         this.list = list;
+
+        }
         //this.listR=listR;
 
-    }
+
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -39,15 +46,27 @@ public class TodayAdapter extends RecyclerView.Adapter {
         return new TodayAdapter.ViewHolder(view);
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Fixture fixture = list.get(position);
-        //Result result = listR.get(position);
-
-        TodayAdapter.ViewHolder.TvDate.setText(fixture.getDate());
+        String c = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+if((fixture.getDate().substring(0,Math.min(fixture.getDate().length(),10)).equals(c)   )){
+        TodayAdapter.ViewHolder.TvDate.setText(fixture.getDate().substring(11,19));
         TodayAdapter.ViewHolder.TvHome.setText(fixture.getHomeTeamName());
-        //ViewHolder.TvScore.setText( fixture.getGoalsHomeTeam().toString());
-        TodayAdapter.ViewHolder.TvAway.setText(fixture.getAwayTeamName());
+        TodayAdapter.ViewHolder.TvScore.setText( fixture.getStatus());
+        TodayAdapter.ViewHolder.TvAway.setText(fixture.getAwayTeamName());}
+        else{
+        ViewHolder.TvDate.setVisibility(View.GONE);
+    ViewHolder.TvHome.setVisibility(View.GONE);
+    ViewHolder.TvScore.setVisibility(View.GONE);
+    ViewHolder.TvAway.setVisibility(View.GONE);
+    ViewHolder.check.setVisibility(View.GONE);
+    ViewHolder.devider.setVisibility(GONE);}
+
+
+
+
     }
 
     @Override
@@ -69,7 +88,7 @@ public class TodayAdapter extends RecyclerView.Adapter {
 
         static TextView TvDate, TvHome, TvAway, TvScore;
         static CheckBox check;
-
+        static SurfaceView devider;
         public ViewHolder(View v) {
             super(v);
 
@@ -78,6 +97,7 @@ public class TodayAdapter extends RecyclerView.Adapter {
             TvScore = (TextView) v.findViewById(R.id.TvScore);
             TvAway = (TextView) v.findViewById(R.id.TvAway);
             check = (CheckBox) v.findViewById(R.id.checkBox);
+            devider=(SurfaceView)v.findViewById(R.id.devider);
         }
     }
 }

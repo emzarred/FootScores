@@ -8,8 +8,15 @@
     android:gravity="center">
 
     <TextView
-        android:id="@+id/fragment_page_title"
+        android:id="@+id/date"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="TextView"/>
+
+    <TextView
+        android:id="@+id/fragment_page_title"
+        android:layout_width="221dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dip"
         android:text="today"

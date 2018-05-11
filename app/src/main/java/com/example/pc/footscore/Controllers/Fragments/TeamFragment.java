@@ -1,6 +1,5 @@
 package com.example.pc.footscore.Controllers.Fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -13,24 +12,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
-import com.example.pc.footscore.Adapters.CompAdapter;
 import com.example.pc.footscore.Adapters.TeamAdapter;
-import com.example.pc.footscore.Models.Competition;
 import com.example.pc.footscore.Models.Team;
 import com.example.pc.footscore.Models.Teams;
 import com.example.pc.footscore.R;
 import com.example.pc.footscore.Retrofits.ApiClient;
 import com.example.pc.footscore.Retrofits.ApiInterface;
-
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-
-import static com.example.pc.footscore.Adapters.TeamAdapter.context;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -110,14 +102,14 @@ public class TeamFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
         final ApiInterface cmp = retrofit.create(ApiInterface.class);
 
-        Call<Teams> call = cmp.getAllTeams(453);
+        Call<Teams> call = cmp.getAllTeams(445);
         Log.d("TeamView", "onResponse: "+call);
         call.enqueue(new Callback<Teams>() {
             @Override
             public void onResponse(Call<Teams> call, Response<Teams> response) {
                 
                 List<Team> list =response.body().getTeams();
-                rv.setAdapter(new TeamAdapter(list,context));
+                rv.setAdapter(new TeamAdapter(list,getContext(),getActivity()));
             }
 
             @Override

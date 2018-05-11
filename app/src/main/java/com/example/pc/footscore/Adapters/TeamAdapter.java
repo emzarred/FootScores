@@ -1,8 +1,10 @@
 package com.example.pc.footscore.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.ahmadrosid.svgloader.SvgLoader;
 import com.bumptech.glide.Glide;
 import com.example.pc.footscore.Models.Team;
 import com.example.pc.footscore.R;
@@ -33,13 +36,12 @@ public class TeamAdapter extends RecyclerView.Adapter {
     private List<Team>list;
 public static Context context;
 private ImageView flag;
-
-    public TeamAdapter(List<Team> list, Context context) {
+private Activity activity;
+    public TeamAdapter(List<Team> list, Context context, Activity activity) {
         this.list=list;
         this.context=context;
+        this.activity=activity;
     }
-   /* public TeamAdapter(List<Team> list) {
-        this.list=list;}*/
 
 
     @Override
@@ -53,52 +55,17 @@ private ImageView flag;
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Team team = list.get(position);
-/*Glide.clear(ViewHolder.flag);
-      Glide.with(context)
-              .load(team.getCrestUrl().toString())
-              .placeholder(R.drawable.stade)
-               .centerCrop()
-                .override(30,50)
-              .into(ViewHolder.flag);*/
-      /*  Picasso.with(context)
-                .load(team.getCrestUrl().toString())
-                .networkPolicy(NetworkPolicy.OFFLINE)//user this for offline support
-                .into(ViewHolder.flag, new Callback() {
-                    @Override
-                    public void onResponse(Call call, Response response) {
+        Log.d("TeamAdapter", "onBindViewHolder: "+team.getCrestUrl());
+        /*Picasso.with(context).load(team.getCrestUrl())
+                .fit().centerCrop()
+                .placeholder(R.drawable.ic_date_range_white_48dp)
+                .into( ViewHolder.flag);*/
 
-                    }
-
-                    @Override
-                    public void onFailure(Call call, Throwable t) {
-
-                    }
-
-
-
-                    @Override
-                    public void onError() {
-                        Picasso.with(context)
-                                .load(team.getCrestUrl().toString())
-                                .error(android.R.drawable.stat_notify_error)//user this for offline support
-                                .into(ViewHolder.flag, new Callback() {
-                                    @Override
-                                    public void onResponse(Call call, Response response) {
-
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call call, Throwable t) {
-
-                                    }
-
-
-                                });
-                    }
-                });*/
+        SvgLoader.pluck()
+                .with(activity)
+                .setPlaceHolder(R.drawable.notfound,R.drawable.notfound)
+                .load(team.getCrestUrl(), ViewHolder.flag);
         ViewHolder.caption.setText(team.getName());
-
-
 
     }
     @Override
@@ -117,12 +84,11 @@ private ImageView flag;
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         static TextView caption;
-static ImageView flag;
-
+        static ImageView flag;
 
         public ViewHolder(View v) {
             super(v);
-flag=(ImageView)v.findViewById(R.id.flag);
+            flag=(ImageView)v.findViewById(R.id.flag);
             caption = (TextView) v.findViewById(R.id.TvCap);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

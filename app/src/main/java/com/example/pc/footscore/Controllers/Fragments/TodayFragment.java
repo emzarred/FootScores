@@ -1,6 +1,7 @@
 package com.example.pc.footscore.Controllers.Fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pc.footscore.Adapters.FixturesAdapter;
 import com.example.pc.footscore.Adapters.TodayAdapter;
@@ -112,6 +114,14 @@ private SwipeRefreshLayout spr;
 
     @Override
     public void onRefresh() {
+        Toast.makeText(getContext(), "Refresh", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                spr.setRefreshing(false);
+            }
+        }, 2000);
+        getMatches();
 
     }
 }

@@ -22,7 +22,7 @@ import retrofit2.http.Query;
 
 public interface ApiInterface {
     @GET("competitions/")
-    Call<List<Competition>> getAllCompetitions(@Query("year") Integer year);
+    Call<List<Competition>> getAllCompetitions(@Query("season") Integer year);
 
     @GET("competitions/{Id}/teams")
     Call<Teams> getAllTeams(@Path("Id") Integer Id);
@@ -39,7 +39,7 @@ public interface ApiInterface {
     @GET("fixtures")
     Call<Today> getAllMatchs();
 
-    @GET("teams/66/fixtures")
+    @GET("teams/66/fixtures/?season=2017")
     Call<TeamFix> getAllFutureFixtures();
 
 }

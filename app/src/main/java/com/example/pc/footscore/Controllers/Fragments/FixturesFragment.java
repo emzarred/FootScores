@@ -40,9 +40,9 @@ import retrofit2.Retrofit;
 public class FixturesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     ApiClient configRetro = new ApiClient();
     Retrofit retrofit = configRetro.getClient();
-
+    public final static String TAG = FixturesFragment.class.getSimpleName();
     List<Fixture> list;
-    List<Result>list1;
+    List<Result> list1;
 
     private ApiInterface cmp;
     private RecyclerView rv;
@@ -109,12 +109,13 @@ public class FixturesFragment extends Fragment implements SwipeRefreshLayout.OnR
         Call<Fixtures> call = cmp.getAllFixtures();
 
 
-
         call.enqueue(new Callback<Fixtures>() {
             @Override
             public void onResponse(Call<Fixtures> call, Response<Fixtures> response) {
+
+                Log.d(TAG, "onResponse: " + response.body().getFixtures().get(0).getResult().getGoalsAwayTeam());
                 List<Fixture> list = response.body().getFixtures();
-           rv.setAdapter(new FixturesAdapter(list));
+                rv.setAdapter(new FixturesAdapter(list));
             }
 
             @Override

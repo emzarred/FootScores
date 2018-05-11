@@ -8,9 +8,14 @@ import android.widget.TextView;
 
 import com.example.pc.footscore.Models.Fixture;
 import com.example.pc.footscore.Models.Result;
+import com.example.pc.footscore.Models.Team;
 import com.example.pc.footscore.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by pc on 01/05/2018.
@@ -18,30 +23,34 @@ import java.util.List;
 
 public class FixturesAdapter extends RecyclerView.Adapter {
     private List<Fixture> list;
-    //private List<Result> listR;
 
-    public FixturesAdapter(List<Fixture> list) {this.list=list;
-   // this.listR=listR;
+
+
+    public FixturesAdapter(List<Fixture> list) {
+        this.list = list;
+
 
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater=LayoutInflater.from(parent.getContext());
-        View view=inflater.inflate(R.layout.fix_cell,parent,false);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.fix_cell, parent, false);
         return new FixturesAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Fixture fixture = list.get(position);
-        //Result result = listR.get(position);
+        String c = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
-        ViewHolder.TvDate.setText(fixture.getDate()  );
+        //if(fixture.getDate()==c){
+        ViewHolder.TvDate.setText(fixture.getDate().substring(0,Math.min(fixture.getDate().length(),10)));
         ViewHolder.TvHome.setText(fixture.getHomeTeamName());
-        //ViewHolder.TvScore.setText((result.getGoalsHomeTeam()).toString() + "-" + (result.getGoalsAwayTeam()).toString());
+        ViewHolder.TvScore.setText(fixture.getResult().getGoalsHomeTeam() + " - " + fixture.getResult().getGoalsAwayTeam());
         ViewHolder.TvAway.setText(fixture.getAwayTeamName());
     }
+
     @Override
     public long getItemId(int position) {
         return position;
@@ -56,20 +65,19 @@ public class FixturesAdapter extends RecyclerView.Adapter {
     public int getItemCount() {
         return list.size();
     }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        static TextView TvDate,TvHome, TvAway,TvScore;
-
-
+        static TextView TvDate, TvHome, TvAway, TvScore;
 
 
         public ViewHolder(View v) {
             super(v);
 
-            TvDate= (TextView)v.findViewById(R.id.TvDate);
-            TvHome=(TextView)v.findViewById(R.id.TvHome);
-            TvScore=(TextView)v.findViewById(R.id.TvScore);
-            TvAway=(TextView)v.findViewById(R.id.TvAway);
+            TvDate = (TextView) v.findViewById(R.id.TvDate);
+            TvHome = (TextView) v.findViewById(R.id.TvHome);
+            TvScore = (TextView) v.findViewById(R.id.TvScore);
+            TvAway = (TextView) v.findViewById(R.id.TvAway);
 
 
         }

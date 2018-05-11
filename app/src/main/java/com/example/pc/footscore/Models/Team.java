@@ -25,7 +25,7 @@ public class Team {
     private Object squadMarketValue;
     @SerializedName("crestUrl")
     @Expose
-    private Object crestUrl;
+    private String crestUrl;
 
    /* public Links_ getLinks() {
         return links;
@@ -67,13 +67,12 @@ public class Team {
         this.squadMarketValue = squadMarketValue;
     }
 
-    public Object getCrestUrl() {
+    public String getCrestUrl() {
         return crestUrl;
     }
 
-    public void setCrestUrl(Object crestUrl) {
+    public void setCrestUrl(String crestUrl) {
         this.crestUrl = crestUrl;
     }
-
 }
 
